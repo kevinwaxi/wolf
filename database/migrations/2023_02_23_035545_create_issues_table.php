@@ -1,11 +1,11 @@
 <?php
 
+use App\Enums\StatusEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('issues', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('device_id')->constrained()->cascadeOnDelete();
+            $table->timestamp('date')->nullable();
+            $table->text('description');
+            $table->bool('isUrgent')->default(false);
+            $table->int('pricing');
+            $table->string('status');
+            $table->text('status_log');
             $table->timestamps();
         });
     }
