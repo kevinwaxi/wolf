@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Issue extends Model
 {
     use HasFactory;
-    use SoftDeletes;
 
     protected $fillable = [
         'device_id',
@@ -20,7 +19,7 @@ class Issue extends Model
         'isUrgent',
         'pricing',
         'status',
-        'status-log'
+        'status_log'
     ];
 
     protected $casts = [

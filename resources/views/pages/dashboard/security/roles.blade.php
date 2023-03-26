@@ -1,5 +1,10 @@
 @extends('layouts.dashboard')
 @section('content')
+    <div class="row mb-2">
+        <a href="{{ route('dashboard.security.users_management.create') }}"
+            class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            <i class="fas fa-plus fa-sm text-white-50"></i> Create Roles</a>
+    </div>
     @foreach ($roles as $role)
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->

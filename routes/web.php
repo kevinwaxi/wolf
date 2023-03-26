@@ -1,11 +1,13 @@
 <?php
 
-use App\Http\Controllers\Dashboard\Catalogue\DeviceController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\DashboardController;
-use App\Http\Controllers\Dashboard\Security\PermissionsController;
 use App\Http\Controllers\Dashboard\Security\RolesController;
 use App\Http\Controllers\Dashboard\Security\UsersController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Dashboard\Catalogue\DeviceController;
+use App\Http\Controllers\Dashboard\Catalogue\CategoryController;
+use App\Http\Controllers\Dashboard\Catalogue\IssueController;
+use App\Http\Controllers\Dashboard\Security\PermissionsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +35,9 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
     });
     Route::group(['prefix' => 'catalogue', 'as' => 'catalogue.'], function () {
         Route::resource('devices', DeviceController::class);
-        Route::resource('categories', CategoriesController::class);
+        Route::get('issues/{device}', [IssueController::class, 'create'])->name('issues.create');
+        Route::post('issues/{device}/store', [IssueController::class, 'store'])->name('issues.store');
+        Route::resource('categories', CategoryController::class);
         // Route::resource('repairs', RepairsController::class);
     });
 });

@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             // CurrencyExchangeSeeder::class,
             RolesAndPermissionsSeeder::class,
             UsersSeeder::class,
+            BrandsSeeder::class
         ]);
     }
 }

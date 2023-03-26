@@ -23,8 +23,8 @@ class StoreDeviceRequest extends FormRequest
     {
         return [
             'customer_id' => ['required', 'exists:users,id'],
+            'brand_id' => ['required','exists:brands,id'],
             'name' => ['required', 'string', 'max:255'],
-            'brand' => ['required'],
             'model_number' => ['required', 'string', 'max:255'],
             'serial_number' => ['required', 'string', 'max:255', 'unique:devices,serial_number'],
         ];

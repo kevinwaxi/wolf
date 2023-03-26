@@ -2,6 +2,7 @@
 <html>
     <head>
         @include('includes.head')
+        @stack('custom-styles')
     </head>
     <body id="page-top">
 

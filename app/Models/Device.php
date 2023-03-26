@@ -15,7 +15,7 @@ class Device extends Model
 
     protected $fillable = [
         'customer_id',
-        'brand',
+        'brand_id',
         'name',
         'model_number',
         'serial_number',
@@ -23,12 +23,17 @@ class Device extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'customer_id');
     }
 
     public function issues(): HasMany
     {
         return $this->hasMany(Issue::class);
+    }
+
+    public function brand(): BelongsTo
+    {
+        return $this->belongsTo(Brands::class);
     }
 
     public function scopeSearch($query, $term)
@@ -37,7 +42,6 @@ class Device extends Model
 
         $query->where(function ($query) use ($term) {
             $query->where('name', 'like', $term)
-                ->orWhere('brand', 'like', $term)
                 ->orWhere('model_number', 'like', $term);
         });
     }
@@ -57,7 +61,8 @@ class Device extends Model
             $sort_field = 'created_at';
         }
 
-        $query->with(['user'])
+        $query->with(['user', 'brand', 'issues'])
+            ->withCount('issues')
             ->orderBy($sort_field, $sort_direction)
             ->search(trim($search_term));
     }

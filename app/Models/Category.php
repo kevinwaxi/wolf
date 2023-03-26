@@ -14,7 +14,7 @@ class Category extends Model
 
     protected $fillable = [
         'name',
-        'description',
+        'details',
     ];
 
     /**
@@ -49,8 +49,7 @@ class Category extends Model
             $sort_field = 'created_at';
         }
 
-        $query->with(['devices'])
-            ->orderBy($sort_field, $sort_direction)
+        $query->orderBy($sort_field, $sort_direction)
             ->search(trim($search_term));
     }
 }
